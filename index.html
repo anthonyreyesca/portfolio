@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony — Full-stack Developer</title>
+<meta name="description" content="Anthony's portfolio — full-stack developer in Antwerp, React, React Native, .NET">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12181B;
+    --panel: #1B2226;
+    --panel-2: #202A2E;
+    --amber: #E8A33D;
+    --teal: #4A8B7C;
+    --text: #EDE9E0;
+    --text-muted: #8B9296;
+    --rule: #2A3338;
+    --radius: 3px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
+
+  /* subtle steel texture via repeating rule lines */
+  body{
+    background-image: repeating-linear-gradient(180deg, transparent, transparent 79px, rgba(255,255,255,0.012) 80px);
+  }
+
+  .stamp{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+    border:1px solid var(--amber);
+    border-radius:var(--radius);
+    padding:4px 10px;
+  }
+  .stamp.teal{ color:var(--teal); border-color:var(--teal); }
+  .stamp.muted{ color:var(--text-muted); border-color:var(--rule); }
+
+  /* nav */
+  nav{
+    border-bottom:1px solid var(--rule);
+    padding:20px 0;
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:var(--text-muted);
+  }
+  .brand b{ color:var(--text); }
+  .nav-links{ display:flex; gap:24px; }
+  .nav-links a{
+    font-size:13px;
+    color:var(--text-muted);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover{ color:var(--amber); border-color:var(--amber); }
+
+  /* hero */
+  header.hero{ padding:72px 0 64px; border-bottom:1px solid var(--rule); }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .id-photo{
+    width:200px;
+    height:240px;
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-radius:var(--radius);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    position:relative;
+  }
+  .id-photo::before, .id-photo::after{
+    content:'';
+    position:absolute;
+    width:14px; height:14px;
+    border:1px solid var(--rule);
+  }
+  .id-photo::before{ top:8px; left:8px; border-right:none; border-bottom:none; }
+  .id-photo::after{ bottom:8px; right:8px; border-left:none; border-top:none; }
+  .id-photo svg{ width:56px; height:56px; color:var(--text-muted); opacity:0.6; }
+  .id-photo span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:44px;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  .role{
+    font-size:16px;
+    color:var(--text-muted);
+    margin-bottom:22px;
+    max-width:44ch;
+  }
+  .id-badge{
+    display:inline-flex;
+    align-items:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    border:1px solid var(--rule);
+    border-radius:var(--radius);
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+  .id-badge span{ padding:8px 14px; }
+  .id-badge .k{ background:var(--panel-2); color:var(--text-muted); border-right:1px solid var(--rule); }
+  .id-badge .v{ color:var(--amber); }
+
+  .hero-links{ display:flex; gap:12px; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    border:1px solid var(--rule);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:border-color .15s, color .15s;
+  }
+  .btn:hover{ border-color:var(--amber); color:var(--amber); }
+  .btn.primary{ background:var(--amber); color:#1B140A; border-color:var(--amber); font-weight:500; }
+  .btn.primary:hover{ opacity:0.9; color:#1B140A; }
+
+  /* about */
+  section.about{ padding:56px 0; border-bottom:1px solid var(--rule); }
+  section.about p{ max-width:64ch; color:var(--text); font-size:15px; }
+  section.about p + p{ margin-top:14px; color:var(--text-muted); }
+
+  /* manifest / projects */
+  section.manifest{ padding:64px 0; border-bottom:1px solid var(--rule); }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:32px; }
+  .section-title{ font-family:'Space Grotesk', sans-serif; font-size:22px; font-weight:700; }
+  .section-count{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-muted); }
+
+  .entry{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:24px;
+    padding:24px 0;
+    border-top:1px solid var(--rule);
+  }
+  .entry:last-child{ border-bottom:1px solid var(--rule); }
+  .entry-id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-muted);
+    padding-top:2px;
+  }
+  .entry-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:19px;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .entry-desc{ color:var(--text-muted); font-size:14px; margin-bottom:16px; max-width:56ch; }
+  .entry-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--text-muted);
+    border:1px solid var(--rule);
+    border-radius:var(--radius);
+    padding:3px 9px;
+  }
+  .entry-links{ display:flex; gap:16px; }
+  .entry-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--teal);
+    border-bottom:1px solid transparent;
+  }
+  .entry-links a:hover{ border-color:var(--teal); }
+
+  /* footer */
+  footer{ padding:48px 0 64px; }
+  footer .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  footer .eyebrow{ margin-bottom:8px; }
+  footer h2{ font-family:'Space Grotesk', sans-serif; font-size:26px; font-weight:700; margin-bottom:6px; }
+  footer p.sub{ color:var(--text-muted); font-size:14px; }
+
+section.skills{ padding:56px 0; border-bottom:1px solid var(--rule); }
+  .skills-cats{ display:flex; flex-direction:column; gap:20px; }
+  .skills-cat{ display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:start; }
+  .skills-cat-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    padding-top:6px;
+  }
+  .skills-tags{ display:flex; gap:8px; flex-wrap:wrap; }
+
+  @media (max-width:640px){
+    .skills-cat{ grid-template-columns:1fr; gap:6px; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .id-photo{ width:140px; height:168px; }
+    h1{ font-size:32px; }
+    .entry{ grid-template-columns:1fr; gap:8px; }
+    .nav-links{ display:none; }
+  }
+
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">MANIFEST / <b>DEV&nbsp;2026</b></div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="id-photo">
+      <!-- Reemplaza este bloque por <img src="assets/foto.jpg" alt="Anthony"> cuando tengas la foto -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      <span>Photo — coming soon</span>
+    </div>
+    <div>
+      <div class="eyebrow">Cargo sheet / Antwerp, BE</div>
+      <h1>Anthony</h1>
+      <p class="role">Junior Full-Stack Developer | React, React Native, Next.js, TypeScript, C#/.NET | 6 Years of Container Depot Experience</p>
+      <div class="id-badge">
+        <span class="k">stack</span>
+        <span class="v">React · Next.js · React Native · C# · TypeScript</span>
+      </div>
+      <br>
+      <div class="hero-links">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <p>I'm a final-year Programming student at AP University of Applied Sciences and Arts Antwerp, with 6 years of experience in customer service and operations at a container depot.</p>
+    <p>This experience has given me a deep understanding of container depot operations, how containers move through the process, how transporters and customers interact with the depot, and how ERP systems support daily operations.</p>
+    <p>I'm now looking to combine my real-world industry experience with my programming skills to build practical software that solves real operational problems.</p>
+  </div>
+</section>
+
+<section class="skills">
+  <div class="wrap">
+    <div class="eyebrow">Cargo contents — skills</div>
+    <div class="skills-cats">
+      <div class="skills-cat">
+        <div class="skills-cat-label">Frontend</div>
+        <div class="skills-tags">
+          <span class="tag">React</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">React Native</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">Backend</div>
+        <div class="skills-tags">
+          <span class="tag">C#</span>
+          <span class="tag">API development</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">Practices</div>
+        <div class="skills-tags">
+          <span class="tag">Testing</span>
+          <span class="tag">Security basics</span>
+          <span class="tag">Scrum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifest" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-title">Cargo manifest — projects</div>
+      <div class="section-count">04 units</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-id">UNIT—01</div>
+      <div>
+        <div class="entry-title">DepotApp</div>
+        <div class="entry-desc">Mobile app for container depot management. Four roles (admin, operator, checker, kiosk) with a real-time status flow: EXP → AI → AV/DAM → OUT.</div>
+        <div class="entry-tags">
+          <span class="tag">React Native</span>
+          <span class="tag">Expo</span>
+          <span class="tag">Supabase</span>
+        </div>
+        <div class="entry-links">
+          <a href="#" target="_blank" rel="noopener">Code ↗</a>
+          <a href="#" target="_blank" rel="noopener">Video demo ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-id">UNIT—02</div>
+      <div>
+        <div class="entry-title">Logistics API</div>
+        <div class="entry-desc">REST API for logistics management with both Controller-based and Minimal API architecture, entity mapping, and relational persistence.</div>
+        <div class="entry-tags">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">EF Core</span>
+          <span class="tag">MySQL</span>
+        </div>
+        <div class="entry-links">
+          <a href="#" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-id">UNIT—03</div>
+      <div>
+        <div class="entry-title">Pizza order app</div>
+        <div class="entry-desc">Web ordering app with shopping cart and a full checkout flow. Built as part of a team.</div>
+        <div class="entry-tags">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+        </div>
+        <div class="entry-links">
+          <a href="#" target="_blank" rel="noopener">Live demo ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-id">UNIT—04</div>
+      <div>
+        <div class="entry-title">Text Adventure — testing &amp; security</div>
+        <div class="entry-desc">C# text adventure game with a full test suite (xUnit, Moq), JWT authentication, and AES-256 encryption.</div>
+        <div class="entry-tags">
+          <span class="tag">C#</span>
+          <span class="tag">xUnit</span>
+          <span class="tag">JWT</span>
+        </div>
+        <div class="entry-links">
+          <a href="#" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2>Let's talk</h2>
+      <p class="sub">Antwerp, Belgium — available for internship</p>
+    </div>
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:tu-email@ejemplo.com">Email</a>
+      <a class="btn" href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
